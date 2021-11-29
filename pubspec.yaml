@@ -14,9 +14,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  simple_animations: ^2.2.2
-  provider: any
-  video_player: 0.10.12+3
+ # simple_animations: ^2.2.2
+ # provider: any
+ # video_player: 0.10.12+3
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
