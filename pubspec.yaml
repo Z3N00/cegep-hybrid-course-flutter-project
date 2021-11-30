@@ -17,6 +17,12 @@ dependencies:
  # simple_animations: ^2.2.2
  # provider: any
  # video_player: 0.10.12+3
+  expandable_text: ^2.2.0
+  marquee: ^2.2.0
+  video_player: ^2.2.7
+  lottie: ^1.1.0
+  google_fonts: ^2.1.0
+  flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -42,6 +48,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/videos/
+    - assets/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
