@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:social_media_app/fullScreenVideo.dart';
 import 'package:social_media_app/navigation_container.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Social Media App",
       theme: ThemeData(
-        primarySwatch: Colors.blue
+       textTheme: GoogleFonts.varelaRoundTextTheme(),
       ),
       home: NavigationContainer(),
     );
