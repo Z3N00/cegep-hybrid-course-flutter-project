@@ -19,6 +19,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           children: [
             _bottombarNavitem(0, 'Home', style, 'home'),
             _bottombarNavitem(1, 'Discover', style, 'search'),
+            _addVideoNavItem(barHeight),
             _bottombarNavitem(3, 'Inbox', style, 'message'),
             _bottombarNavitem(4, 'Profile', style, 'account')
           ],
@@ -42,10 +43,30 @@ class CustomBottomNavigationBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
         SvgPicture.asset('assets/${isSelected ? iconName + '_filled' : iconName}.svg', color: iconAndTextColor,),
-        //const SizedBox(height: 1),
+        const SizedBox(height: 3),
         Text(label, style: textStyle.copyWith(color: iconAndTextColor),)
       ],),
     );
   }
 
+  _addVideoNavItem(double height){
+    return Container(
+      height: height - 15,
+      width: 48,
+      decoration: BoxDecoration(gradient: const LinearGradient(
+          colors: [Colors.blueAccent, Colors.redAccent]
+      ),
+        borderRadius: BorderRadius.circular(8)),
+      child: Center(
+        child: Container(
+          width: 41,
+            height: height - 15,
+          decoration: BoxDecoration(
+            color: selectedPageIndex == 0 ? Colors.white : Colors.black,
+            borderRadius: BorderRadius.circular(8)),
+          child: Icon(Icons.add, color: selectedPageIndex == 0 ? Colors.black: Colors.white),
+        ),
+      ),
+    );
+  }
 }
