@@ -43,7 +43,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
         SvgPicture.asset('assets/${isSelected ? iconName + '_filled' : iconName}.svg', color: iconAndTextColor,),
-        const SizedBox(height: 3),
+        //const SizedBox(height: 3),
         Text(label, style: textStyle.copyWith(color: iconAndTextColor),)
       ],),
     );
@@ -51,6 +51,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   _addVideoNavItem(double height){
     return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
       height: height - 15,
       width: 48,
       decoration: BoxDecoration(gradient: const LinearGradient(
