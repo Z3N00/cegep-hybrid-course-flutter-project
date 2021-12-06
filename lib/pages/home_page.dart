@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media_app/widgets/home_side_bar.dart';
+import 'package:social_media_app/widgets/video_detail.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: PageView.builder(
         onPageChanged: (int page)=>{print("page changed to $page")},
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index){
         return Stack(
@@ -68,13 +69,14 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height / 4,
                       color: Colors.amber,
+                      child: VideoDetail(),
                     )
                 ),
                 Expanded(
                     child: Container(
                       height: MediaQuery.of(context).size.height / 1.75,
                       child: HomeSideBar(),
-                      color: Colors.pink,
+                     // color: Colors.pink,
                     )
                 ),
               ],
