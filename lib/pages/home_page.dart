@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   flex: 3,
                     child: Container(
                       height: MediaQuery.of(context).size.height / 4,
-                      color: Colors.amber,
+                      //color: Colors.amber,
                       child: VideoDetail(),
                     )
                 ),
