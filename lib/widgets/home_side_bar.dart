@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:social_media_app/models/video.dart';
 
 class HomeSideBar extends StatefulWidget {
-  const HomeSideBar({Key? key}) : super(key: key);
+  const HomeSideBar({Key? key, required this.video}) : super(key: key);
+  final Video video;
 
   @override
   State<HomeSideBar> createState() => _HomeSideBarState();
@@ -41,9 +43,9 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _profileImageButton(),
-          _sideBarItem('heart', '1.2M', style),
-          _sideBarItem("comment", "1.2k", style),
+          _profileImageButton(widget.video.postedBy.profileimageUrl),
+          _sideBarItem('heart', widget.video.likes, style),
+          _sideBarItem("comment", widget.video.comments, style),
           _sideBarItem("share", "Share", style),
           AnimatedBuilder(
             child: Stack(
@@ -54,9 +56,9 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
                   width: 50,
                   child: Image.asset("assets/disk.png")
                 ),
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 12,
-                  backgroundImage:NetworkImage('https://picsum.photos/id/1062/400/400'),
+                  backgroundImage:NetworkImage(widget.video.postedBy.profileimageUrl),
                 )
               ],),
             animation: _animationController, builder: (context, child){
@@ -82,7 +84,7 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
     );
   }
 
-  _profileImageButton(){
+  _profileImageButton(String imageUrl){
     return Stack(
       clipBehavior: Clip.none, //check this
       alignment: Alignment.bottomCenter,
@@ -93,8 +95,9 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(25),
-            image: const DecorationImage(
-              image: NetworkImage('https://picsum.photos/id/1062/400/400')
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(imageUrl)
             )
           ),
         ),

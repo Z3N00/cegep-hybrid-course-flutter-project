@@ -2,26 +2,26 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:social_media_app/_mock_data/mock.dart';
+//import 'package:social_media_app/_mock_data/mock.dart';
+import 'package:social_media_app/models/video.dart';
 
 
-class VideoDetail extends StatefulWidget {
-  const VideoDetail({Key? key}) : super(key: key);
+class VideoDetail extends StatelessWidget {
 
-  @override
-  _VideoDetailState createState() => _VideoDetailState();
-}
+  const VideoDetail({Key? key, required this.video}) : super(key: key);
+  final Video video;
 
-class _VideoDetailState extends State<VideoDetail> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text("@yeah_yes", style:
-          Theme.of(context).textTheme.bodyText1!.copyWith(
+          Text("@${video.postedBy.username}",
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontSize: 15,
               color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class _VideoDetailState extends State<VideoDetail> {
           const SizedBox(
             height: 8.0,
           ),
-          ExpandableText("Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here Video Caption goes here",
+          ExpandableText(video.caption,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontSize: 13,
                 color: Colors.white,
@@ -58,7 +58,7 @@ class _VideoDetailState extends State<VideoDetail> {
                 height: 20,
                 width: MediaQuery.of(context).size.width/2,
                 child: Marquee(
-                  text: "Audio Name   *    ",
+                  text: "${video.audioName}   *    ",
                   velocity: 8,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontSize: 13,
