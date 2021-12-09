@@ -6,8 +6,31 @@ class DiscoverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
+    return Scaffold(
+
+      extendBodyBehindAppBar: true,
+        backgroundColor: Colors.black54,
+        body: Stack(
+
+        children: [
+        Container(
+        decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+    ),
+    margin: EdgeInsets.all(20),
+
+
+    child: const TextField(
+    decoration: InputDecoration(
+    border: InputBorder.none,
+    prefixIcon: Icon(Icons.search)
+    ),
+
+    ),
+    )],
+
+    ),
     );
   }
 }
