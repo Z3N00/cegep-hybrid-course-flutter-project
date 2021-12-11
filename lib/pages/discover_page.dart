@@ -118,14 +118,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
                     }
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: CirclePageIndicator(
-                    currentPageNotifier: _currentPageNotifier,
-                    itemCount: 5,
-                    selectedSize: 5,
-                  ),
-                )
+                // Padding(
+                //   padding: const EdgeInsets.only(bottom: 15),
+                //   child: CirclePageIndicator(
+                //     currentPageNotifier: _currentPageNotifier,
+                //     itemCount: 5,
+                //     selectedSize: 5,
+                //   ),
+                // )
               ],
             ),
           ),
