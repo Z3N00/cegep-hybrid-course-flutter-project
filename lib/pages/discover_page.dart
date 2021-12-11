@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
+import 'package:social_media_app/widgets/discover_section.dart';
 // page_view_indicators: ^2.0.0
 
 final List<String> imgList = [
@@ -25,8 +26,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
   final PageController _pageController = PageController();
   final _currentPageNotifier = ValueNotifier<int>(0);
 
-  int _currentPage = 0;
-  late Timer _timer;
+  //int _currentPage = 0;
+ // late Timer _timer;
 
   // @override
   // void initState() {
@@ -41,14 +42,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
   //   });
   //   super.initState();
   // }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _pageController.dispose();
-    _timer.cancel();
-    super.dispose();
-  }
+  //
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   _pageController.dispose();
+  //   _timer.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,20 @@ class _DiscoverPageState extends State<DiscoverPage> {
               ],
             ),
           ),
-        )
+        ),
+        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index){
+              return Container(
+                height: MediaQuery.of(context).size.height/3.75,
+
+                child: DiscoverSection(
+                  height: MediaQuery.of(context).size.height/3.75,
+                ),
+              );
+        },
+        childCount: 10
+        ))
       ],
     );
   }
