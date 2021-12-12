@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             _snappedPageIndex = page;
           }),
         },
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         itemCount: videos.length,
         itemBuilder: (context, index){
         return Stack(

@@ -1,6 +1,4 @@
 
-
-
 import 'package:flutter/material.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
 
