@@ -1,7 +1,10 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../main.dart';
 
 class AddVideoPage extends StatefulWidget {
   const AddVideoPage({Key? key}) : super(key: key);
@@ -11,14 +14,27 @@ class AddVideoPage extends StatefulWidget {
 }
 
 class _AddVideoPageState extends State<AddVideoPage> {
+  CameraController _cameraController =
+      CameraController(cameras.first, ResolutionPreset.medium);
   PageController _pageController =
       PageController(initialPage: 1, viewportFraction: 0.2);
   int _selectedTab = 1;
 
   @override
+  void initState() {
+    super.initState();
+
+    _cameraController.initialize().then((_) {
+      if (!mounted) return;
+      setState(() {});
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _pageController.dispose();
+    _cameraController.dispose();
   }
 
   @override
@@ -28,7 +44,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          _buildCameraPreview(),
+          if (_cameraController.value.isInitialized) _buildCameraPreview(),
           Spacer(),
           Container(
             color: Colors.black,
@@ -47,95 +63,107 @@ class _AddVideoPageState extends State<AddVideoPage> {
     return Container(
       color: Colors.grey,
       height: MediaQuery.of(context).size.height - 90,
-      child: Column(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 75, left: 24, right: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () => {
-                    Navigator.pop(context),
-                  },
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.25),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                        child: Icon(
-                          CupertinoIcons.music_note_2,
-                          color: Colors.white,
-                          size: 15,
-                        ),
+          Transform.scale(
+            scale: 1.5,
+            alignment: Alignment.center,
+            child: CameraPreview(_cameraController),
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 75, left: 24, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () => {
+                        Navigator.pop(context),
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
                       ),
-                      Text(
-                        "Add Sound",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.25),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 3.0),
+                            child: Icon(
+                              CupertinoIcons.music_note_2,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                          ),
+                          Text(
+                            "Add Sound",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height / 3.25,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildIconWithText('flip', 'Flip', style, 20),
+                          _buildIconWithText('beauty', 'Beauty', style, 20),
+                          _buildIconWithText('filter', 'Filter', style, 20),
+                          _buildIconWithText('flash', 'Flash', style, 20),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 3.25,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildIconWithText('flip', 'Flip', style, 20),
-                      _buildIconWithText('beauty', 'Beauty', style, 20),
-                      _buildIconWithText('filter', 'Filter', style, 20),
-                      _buildIconWithText('flash', 'Flash', style, 20),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-
-          Spacer(),
-          _buildCameraTypeSelector(),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30, top: 10, left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildIconWithText(
-                    'effects', 'Effects', style.copyWith(fontSize: 11), 40),
-                Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 4),
-                    borderRadius: BorderRadius.circular(50)
-                  ),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 30,
-                  ),
-
+              ),
+              Spacer(),
+              _buildCameraTypeSelector(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 30, top: 10, left: 30, right: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildIconWithText(
+                        'effects', 'Effects', style.copyWith(fontSize: 11), 40),
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 4),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 30,
+                      ),
+                    ),
+                    _buildIconWithText(
+                        'upload', 'Upload', style.copyWith(fontSize: 11), 40),
+                  ],
                 ),
-
-                _buildIconWithText(
-                    'upload', 'Upload', style.copyWith(fontSize: 11), 40),
-              ],
-            ),
-          )
+              )
+            ],
+          ),
         ],
       ),
     );
