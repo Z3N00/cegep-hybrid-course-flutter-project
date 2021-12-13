@@ -42,7 +42,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         children: [
 
         SvgPicture.asset('assets/$iconName.svg' ),
-        const SizedBox(height: 3),
+       // const SizedBox(height: 3),
         //Text(label, style: textStyle.copyWith(color: iconAndTextColor),)
       ],),
     );

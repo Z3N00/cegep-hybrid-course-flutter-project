@@ -34,6 +34,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: _pages[_selectPageIndex],
       ),
