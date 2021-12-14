@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:social_media_app/pages/add_videos_page.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({Key? key, required this.selectedPageIndex, required this.onIconTap}) : super(key: key);
@@ -21,7 +20,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           children: [
             _bottombarNavitem(0, 'Home', style, 'icons8-home'),
             _bottombarNavitem(1, 'Discover', style, 'icons8-binoculars'),
-           _addVideoNavItem(barHeight, context),
+           _addVideoNavItem(barHeight),
 
             _bottombarNavitem(3, 'Inbox', style, 'icons8-mailbox'),
             _bottombarNavitem(4, 'Profile', style, 'icons8-user-male')
@@ -49,34 +48,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 
-  _addVideoNavItem(double height, BuildContext context){
-    return GestureDetector(
-      onTap: () => {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-             fullscreenDialog: true,
-             builder: (context) {
-              return AddVideoPage();
-
-               },
-            ),
-        )
-      },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 5.0),
-        height: height - 15,
-        width: 48,
+  _addVideoNavItem(double height){
+    return Container(
+      margin: EdgeInsets.only(bottom: 5.0),
+      height: height - 15,
+      width: 48,
 
 
-        child: Center(
-          child: Container(
+      child: Center(
+        child: Container(
 
-            child:SvgPicture.asset('assets/icons8-instagram-old.svg' ),
+          child:SvgPicture.asset('assets/icons8-instagram-old.svg' ),
 
 
 
-          ),
         ),
       ),
     );
