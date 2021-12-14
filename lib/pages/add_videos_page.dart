@@ -14,9 +14,9 @@ class AddVideoPage extends StatefulWidget {
 }
 
 class _AddVideoPageState extends State<AddVideoPage> {
-  CameraController _cameraController =
+  final CameraController _cameraController =
       CameraController(cameras.first, ResolutionPreset.medium);
-  PageController _pageController =
+  final PageController _pageController =
       PageController(initialPage: 1, viewportFraction: 0.2);
   int _selectedTab = 1;
 
@@ -83,23 +83,23 @@ class _AddVideoPageState extends State<AddVideoPage> {
                       onTap: () => {
                         Navigator.pop(context),
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         color: Colors.white,
                       ),
                     ),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                          const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.25),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
                         children: [
-                          Padding(
+                          const Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 3.0),
+                                EdgeInsets.symmetric(horizontal: 3.0),
                             child: Icon(
                               CupertinoIcons.music_note_2,
                               color: Colors.white,
@@ -134,9 +134,9 @@ class _AddVideoPageState extends State<AddVideoPage> {
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               _buildCameraTypeSelector(),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -152,7 +152,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white, width: 4),
                           borderRadius: BorderRadius.circular(50)),
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 30,
                       ),
@@ -214,7 +214,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
           'assets/$icon.svg',
           height: size,
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Text(
@@ -261,7 +261,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
           width: 50,
           height: 45,
           alignment: Alignment.bottomCenter,
-          child: CircleAvatar(
+          child: const CircleAvatar(
             backgroundColor: Colors.white,
             radius: 2.5,
           ),
