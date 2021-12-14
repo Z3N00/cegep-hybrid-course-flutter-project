@@ -31,9 +31,7 @@ class InboxPage extends StatelessWidget {
                 padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(40)),
-                    border: Border.all(
-                        width: 1.5,
-                        color:Colors.black),
+
 
                     boxShadow: [BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -52,17 +50,24 @@ class InboxPage extends StatelessWidget {
 
                 padding: EdgeInsets.only(left: 20,),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(chat.sender.name, style: TextStyle(fontSize: 15,
-                            fontWeight: FontWeight.bold),),
-                        Text(chat.time,style: TextStyle(
-                          fontSize:11,
-                          fontWeight:FontWeight.w300,
-                          color: Colors.black54,
-                        ),)
+
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+
+                            Text(chat.sender.name, style: TextStyle(fontSize: 15,
+                                fontWeight: FontWeight.bold
+                            ),
+                            ),
+
+
+                            Text(chat.time,style: TextStyle(
+                              fontSize:11,
+                              fontWeight:FontWeight.w300,
+                              color: Colors.black54,
+                            ),),
+
                       ],
                     ),
                     SizedBox(
@@ -80,15 +85,19 @@ class InboxPage extends StatelessWidget {
 
                     ),
 
+
                   ],
 
                 ),
 
               ),
             ],
+
           ),
+
         );
       },
+
       )
 
 
