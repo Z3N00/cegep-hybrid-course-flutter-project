@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(37),
                       image: DecorationImage(
-                          image:NetworkImage("https://picsum.photos/id/1062/400/400"),
+                          image:AssetImage("assets/inder.jpg"),
                           fit: BoxFit.cover)
                   ),
                 ),
