@@ -36,13 +36,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => {onIconTap(index)},
       child: Container(
-        margin: EdgeInsets.only(bottom: 5.0),
-        height: height - 15,
-        width: 48,
+        // margin: EdgeInsets.only(bottom: 5.0),
+        // height: height - 15,
+        // width: 48,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-
           SvgPicture.asset('assets/$iconName.svg' ),
           //const SizedBox(height: 3),
           //Text(label, style: textStyle.copyWith(color: iconAndTextColor),)

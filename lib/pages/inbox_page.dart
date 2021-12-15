@@ -12,17 +12,20 @@ class InboxPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+
         elevation: 0.25,
         title: Row(
             children:  [
-              SvgPicture.asset("assets/icons8-mailbox.svg"),
+              Text(' Inbox ', style: TextStyle(color: Colors.black)),
               const SizedBox(width: 20),
-              const Text(' Inbox ', style: TextStyle(color: Colors.black),)
-            ]
-        ),
+              SvgPicture.asset("assets/icons8-mailbox.svg"),
 
-        backgroundColor: Colors.white,
-      ),
+              ]),
+          backgroundColor: Colors.white,
+          ),
+
+
+
       body:ListView.builder(
         itemCount: chats.length,
         itemBuilder:(BuildContext context, int index){
