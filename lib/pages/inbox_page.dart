@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:social_media_app/models/message_model.dart';
 import 'package:social_media_app/models/user_model.dart';
 import 'package:social_media_app/pages/chat_screen.dart';
@@ -8,15 +9,19 @@ class InboxPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon:Icon(Icons.menu),onPressed: (){},),
-        title: Text(' Inbox ',),
-        actions: <Widget>[
-          IconButton( icon: Icon(Icons.search),
-            onPressed: (){},),
-        ],
-        backgroundColor: Colors.black,
+        elevation: 0.25,
+        title: Row(
+            children:  [
+              SvgPicture.asset("assets/icons8-mailbox.svg"),
+              const SizedBox(width: 20),
+              const Text(' Inbox ', style: TextStyle(color: Colors.black),)
+            ]
+        ),
+
+        backgroundColor: Colors.white,
       ),
       body:ListView.builder(
         itemCount: chats.length,
