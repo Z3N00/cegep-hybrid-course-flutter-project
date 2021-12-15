@@ -18,46 +18,49 @@ class CustomBottomNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _bottombarNavitem(0, 'Home', style, 'icons8-home'),
-            _bottombarNavitem(1, 'Discover', style, 'icons8-binoculars'),
+            _bottombarNavitem(0, 'Home', style, 'icons8-home', barHeight),
+            _bottombarNavitem(1, 'Discover', style, 'icons8-binoculars', barHeight),
            _addVideoNavItem(barHeight),
 
-            _bottombarNavitem(3, 'Inbox', style, 'icons8-mailbox'),
-            _bottombarNavitem(4, 'Profile', style, 'icons8-user-male')
+            _bottombarNavitem(3, 'Inbox', style, 'icons8-mailbox', barHeight),
+            _bottombarNavitem(4, 'Profile', style, 'icons8-user-male', barHeight)
           ],
         ),
       ),
     );
   }
 
-  _bottombarNavitem(int index, String label, TextStyle textStyle, String iconName){
+  _bottombarNavitem(int index, String label, TextStyle textStyle, String iconName, double height){
     bool isSelected = selectedPageIndex == index;
-
-
-
     return GestureDetector(
       onTap: () => {onIconTap(index)},
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
+      child: Container(
+        margin: EdgeInsets.only(bottom: 5.0),
+        height: height - 15,
+        width: 48,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
 
-        SvgPicture.asset('assets/$iconName.svg' ),
-        const SizedBox(height: 3),
-        //Text(label, style: textStyle.copyWith(color: iconAndTextColor),)
-      ],),
+          SvgPicture.asset('assets/$iconName.svg' ),
+          //const SizedBox(height: 3),
+          //Text(label, style: textStyle.copyWith(color: iconAndTextColor),)
+        ],),
+      ),
     );
   }
 
   _addVideoNavItem(double height){
-    return Container(
-      margin: EdgeInsets.only(bottom: 5.0),
-      height: height - 15,
-      width: 48,
+    return GestureDetector(
+      onTap: () => {
 
+      },
 
       child: Center(
         child: Container(
-
+          margin: const EdgeInsets.only(bottom: 5.0),
+          height: height - 15,
+          width: 48,
           child:SvgPicture.asset('assets/icons8-instagram-old.svg' ),
 
 
