@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:social_media_app/models/message_model.dart';
 import 'package:social_media_app/models/user_model.dart';
+import 'package:social_media_app/pages/chat_screen.dart';
 class InboxPage extends StatelessWidget {
   const InboxPage({Key? key}) : super(key: key);
 
@@ -21,7 +22,19 @@ class InboxPage extends StatelessWidget {
         itemCount: chats.length,
         itemBuilder:(BuildContext context, int index){
           final Message chat = chats[index];
-        return Container(padding: EdgeInsets.symmetric(
+        return GestureDetector(
+              onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ChatScreen(
+                user: chat.sender,
+              ),
+            ),
+          ),
+
+
+
+          child:Container(padding: EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 15,
         ),
@@ -42,7 +55,7 @@ class InboxPage extends StatelessWidget {
                 ),
                 child:CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage(chat.sender.imageUrl),//NetworkImage("https://picsum.photos/id/1062/400/400"),
+                  backgroundImage: AssetImage(chat.sender.imageUrl),
                 ),
               ),
               Container(
@@ -76,7 +89,13 @@ class InboxPage extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child:Text(chat.text,
+                      child:chat.unread?Text(chat.text,
+                        style: TextStyle(fontSize: 13,
+                            color: Colors.black,fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines:2,
+                      ):
+                      Text(chat.text,
                         style: TextStyle(fontSize: 13,
                             color: Colors.black54),
                         overflow: TextOverflow.ellipsis,
@@ -94,7 +113,7 @@ class InboxPage extends StatelessWidget {
             ],
 
           ),
-
+          ),
         );
       },
 

@@ -15,7 +15,7 @@ class User {
 // YOU - current user
 final User currentUser = User(
   id: 0,
-  name: 'Nick Fury',
+  name: 'Inderpreet Singh',
   imageUrl: 'assets/inder.jpg',
   isOnline: true,
 );
