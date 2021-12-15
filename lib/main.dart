@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:social_media_app/fullScreenVideo.dart';
-import 'package:social_media_app/navigation_container.dart';
+
 import 'package:social_media_app/pages/loginMain.dart';
 
 void main() {

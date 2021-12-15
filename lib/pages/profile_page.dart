@@ -43,17 +43,17 @@ class ProfilePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(37),
                       image: DecorationImage(
-                          image:AssetImage("assets/inder.jpg"),
+                          image:AssetImage("assets/user.jpg"),
                           fit: BoxFit.cover)
                   ),
                 ),
               ),
             ),
             SizedBox(height: 10,),
-            Text("Inderpreet Singh",
+            Text("User",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),),
             SizedBox(height: 10,),
-            Text("@inder431", style: TextStyle(fontSize: 16,color: Colors.black,),),
+            Text("@user431", style: TextStyle(fontSize: 16,color: Colors.black,),),
           ],
         ),
       ),

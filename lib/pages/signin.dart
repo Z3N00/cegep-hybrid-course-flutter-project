@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:social_media_app/models/user_login.dart';
+import 'package:social_media_app/navigation_container.dart';
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      inputFile(label: "Email"),
+                      inputFile(label: "Username"),
                       inputFile(label: "Password", obscureText: true)
                     ],
                   ),
@@ -71,7 +72,9 @@ class LoginPage extends StatelessWidget {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationContainer()));
+                      },
                       color: Colors.redAccent,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
