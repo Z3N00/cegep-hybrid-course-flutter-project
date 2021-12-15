@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:social_media_app/pages/add_videos_page.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({Key? key, required this.selectedPageIndex, required this.onIconTap}) : super(key: key);
@@ -20,7 +21,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           children: [
             _bottombarNavitem(0, 'Home', style, 'icons8-home', barHeight),
             _bottombarNavitem(1, 'Discover', style, 'icons8-binoculars', barHeight),
-           _addVideoNavItem(barHeight),
+           _addVideoNavItem(barHeight, context),
 
             _bottombarNavitem(3, 'Inbox', style, 'icons8-mailbox', barHeight),
             _bottombarNavitem(4, 'Profile', style, 'icons8-user-male', barHeight)
@@ -50,11 +51,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 
-  _addVideoNavItem(double height){
+  _addVideoNavItem(double height, BuildContext context){
     return GestureDetector(
       onTap: () => {
 
-      },
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              fullscreenDialog: true,
+              builder: (context){
+                return AddVideoPage();
+          },
+        ),
+      )
+    },
 
       child: Center(
         child: Container(
