@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:video_player/video_player.dart';
 //
-//
+// adding comments
 // class FullScreenVideo extends StatefulWidget {
 //   final String videoUrl;   // Video Url from our asset folder
 //   const FullScreenVideo({required this.videoUrl});
