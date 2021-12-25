@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,19 +26,60 @@ class _AddVideoPageState extends State<AddVideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      extendBodyBehindAppBar: true,
       body: Column(
         children: [
-          Container(
-            color: Colors.amber,
-          ),
+          _buildCameraPreview(),
           const Spacer(),
           Container(
             color: Colors.black,
             height: 90,
             child: _buildCameraTemplateSelector(),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCameraPreview(){
+    return Container(
+      color: Colors.black,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 75, left: 24),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () => {
+                    Navigator.pop(context)
+                  },
+                  child: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.25),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(CupertinoIcons.music_note_2,
+                      color: Colors.white,
+                      size: 15,
+                      ),
+                      Text("Add Sound", style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),)
+                    ],
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
