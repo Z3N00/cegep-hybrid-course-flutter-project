@@ -35,7 +35,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
           ),
           const Spacer(),
           Container(
-            color: Colors.red,
+            color: Colors.black,
             height: 90,
             child: _buildCameraTemplateSelector(),
           )
