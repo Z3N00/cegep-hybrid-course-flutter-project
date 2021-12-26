@@ -43,32 +43,37 @@ class _AddVideoPageState extends State<AddVideoPage> {
 
   Widget _buildCameraPreview(){
     return Container(
-      color: Colors.black,
+      color: Colors.amber,
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 75, left: 24),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () => {
                     Navigator.pop(context)
                   },
-                  child: Icon(
+                  child: const Icon(
                       Icons.close,
                       color: Colors.white,
                   ),
                 ),
                 Container(
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.25),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
                     children: [
-                      Icon(CupertinoIcons.music_note_2,
-                      color: Colors.white,
-                      size: 15,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        child: Icon(CupertinoIcons.music_note_2,
+                        color: Colors.white,
+                        size: 15,
+                        ),
                       ),
                       Text("Add Sound", style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           fontSize: 14,
@@ -77,6 +82,10 @@ class _AddVideoPageState extends State<AddVideoPage> {
                       ),)
                     ],
                   ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height/ 3,
+                  child: Column(),
                 )
               ],
             ),
