@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class AddVideoPage extends StatefulWidget {
@@ -42,6 +43,12 @@ class _AddVideoPageState extends State<AddVideoPage> {
   }
 
   Widget _buildCameraPreview(){
+    final TextStyle style = Theme.of(context).textTheme.bodyText1!.copyWith(
+      fontSize: 13,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+
     return Container(
       color: Colors.amber,
       child: Column(
@@ -50,6 +57,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
             padding: const EdgeInsets.only(top: 75, left: 24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
                   onTap: () => {
@@ -85,7 +93,16 @@ class _AddVideoPageState extends State<AddVideoPage> {
                 ),
                 Container(
                   height: MediaQuery.of(context).size.height/ 3,
-                  child: Column(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildIconWithText('flip', 'Flip', style, 20),
+                      _buildIconWithText('beauty', 'Beauty', style, 20),
+                      _buildIconWithText('filter', 'Filter', style, 20),
+                      _buildIconWithText('flash', 'Flash', style, 20)
+
+                    ],
+                  ),
                 )
               ],
             ),
@@ -95,7 +112,17 @@ class _AddVideoPageState extends State<AddVideoPage> {
     );
   }
 
- Widget _buildCameraTemplateSelector() {
+  Widget _buildIconWithText(String icon, String label, TextStyle style, double size){
+    return Column(
+      children: [
+        SvgPicture.asset("assets/$icon.svg", height: size,),
+        const SizedBox(height: 5,),
+        Text(label, style: style,)
+      ],
+    );
+  }
+
+  Widget _buildCameraTemplateSelector() {
     final List<String> postTypes = ["Camera", "Quick", "Templates"];
     TextStyle style = Theme.of(context).textTheme.bodyText1!.copyWith(
         fontSize: 13,
