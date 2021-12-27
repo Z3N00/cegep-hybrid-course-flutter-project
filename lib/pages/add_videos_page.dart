@@ -21,16 +21,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
   );
   int _selectedTab = 1;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _cameraController.initialize().then((_) => {
-  //     if(!mounted) return
-  //
-  //       setState((){})
-  //   });
-  // }
+
 
   @override
   void dispose() {
@@ -47,6 +38,7 @@ class _AddVideoPageState extends State<AddVideoPage> {
       body: Column(
         children: [
          // if(_cameraController.value.isInitialized)_buildCameraPreview(),
+          _buildCameraPreview(),
           const Spacer(),
           Container(
             color: Colors.black,
