@@ -4,12 +4,12 @@ import 'package:social_media_app/fullScreenVideo.dart';
 import 'package:camera/camera.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 
-late List<CameraDescription> cameras;
+//late List<CameraDescription> cameras;
 
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+void main()  {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //cameras = await availableCameras();
   runApp(const MyApp());
 }
 
