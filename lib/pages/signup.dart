@@ -201,10 +201,10 @@ class _SignupPageState extends State<SignupPage> {
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
                         dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-                        print(result);
-                        if(result == null){
+                       // print("RESULT : "+ result);
+                        if(result == null) {
                           setState(() {
-                            error = 'Please supply valid email ';
+                            error = 'Please give a valid email ';
                             Fluttertoast.showToast(
                               msg: error,
                               toastLength: Toast.LENGTH_LONG,
