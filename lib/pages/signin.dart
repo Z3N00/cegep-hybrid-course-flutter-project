@@ -14,6 +14,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  final _formKey = GlobalKey<FormState>();
+
   String email = '';
   String password = '';
 
@@ -37,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
           icon: const Icon(Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,),
-
 
         ),
       ),
@@ -65,61 +66,64 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 5.0
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 5.0
+                                )
+                              ),
+                              labelText: "Email",
+                              prefixIcon: Icon(Icons.mail)
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value){
+                              setState(() {
+                                email = value;
+                              //  print("Email");
+                              });
+                            },
+                          ),
+
+                          const SizedBox(
+                            height: 30.0,
+                          ),
+
+                          TextFormField(
+                            decoration:  InputDecoration(
+                              border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.blueGrey,
+                                      width: 5.0
+                                  )
+                              ),
+                              labelText: "Password",
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                                onPressed: () {
+                                  setState(() {
+                                    _isHidden = !_isHidden;
+                                  });
+                                },
                               )
                             ),
-                            labelText: "Email",
-                            prefixIcon: Icon(Icons.mail)
+                            keyboardType: TextInputType.text,
+                            obscureText: _isHidden,
+                            onChanged: (value){
+                              setState(() {
+                                password = value;
+                               // print(password);
+                              });
+                            },
                           ),
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value){
-                            setState(() {
-                              email = value;
-                            //  print("Email");
-                            });
-                          },
-                        ),
-
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-
-                        TextFormField(
-                          decoration:  InputDecoration(
-                            border: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blueGrey,
-                                    width: 5.0
-                                )
-                            ),
-                            labelText: "Password",
-                            prefixIcon: Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-                              onPressed: () {
-                                setState(() {
-                                  _isHidden = !_isHidden;
-                                });
-                              },
-                            )
-                          ),
-                          keyboardType: TextInputType.text,
-                          obscureText: _isHidden,
-                          onChanged: (value){
-                            setState(() {
-                              password = value;
-                             // print(password);
-                            });
-                          },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(padding:

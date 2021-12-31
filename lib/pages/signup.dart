@@ -9,11 +9,13 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
+  final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
 
   late bool _isHidden = true;
+  late bool _confirmPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,106 +63,117 @@ class _SignupPageState extends State<SignupPage> {
 
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 5.0
-                            )
-                        ),
-                        labelText: "User Name",
-                        prefixIcon: Icon(Icons.person)
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      validator: (value) => value!.isEmpty ? 'Enter a User Name' : null,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 5.0
+                              )
+                          ),
+                          labelText: "User Name",
+                          prefixIcon: Icon(Icons.person)
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value){
+                        setState(() {
+                          email = value;
+                          //  print("Email");
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value){
-                      setState(() {
-                        email = value;
-                        //  print("Email");
-                      });
-                    },
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 5.0
-                            )
-                        ),
-                        labelText: "Email",
-                        prefixIcon: Icon(Icons.mail)
+                    SizedBox(height: 20.0),
+                    TextFormField(
+                      validator: (value) => value!.isEmpty ? 'Enter an Email' : null,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 5.0
+                              )
+                          ),
+                          labelText: "Email",
+                          prefixIcon: Icon(Icons.mail)
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value){
+                        setState(() {
+                          email = value;
+                          //  print("Email");
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value){
-                      setState(() {
-                        email = value;
-                        //  print("Email");
-                      });
-                    },
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration:  InputDecoration(
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 5.0
-                            )
-                        ),
-                        labelText: "Password",
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-                          onPressed: () {
-                            setState(() {
-                              _isHidden = !_isHidden;
-                            });
-                          },
-                        )
+                    SizedBox(height: 20.0),
+                    TextFormField(
+                        validator: (value) => value!.length < 6 ? 'Enter a password of 6 or more characters' : null,
+                      decoration:  InputDecoration(
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 5.0
+                              )
+                          ),
+                          labelText: "Password",
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                _isHidden = !_isHidden;
+                              });
+                            },
+                          )
+                      ),
+                      keyboardType: TextInputType.text,
+                      obscureText: _isHidden,
+                      onChanged: (value){
+                        setState(() {
+                          password = value;
+                          // print(password);
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.text,
-                    obscureText: _isHidden,
-                    onChanged: (value){
-                      setState(() {
-                        password = value;
-                        // print(password);
-                      });
-                    },
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration:  InputDecoration(
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 5.0
-                            )
-                        ),
-                        labelText: "Confirm Password",
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-                          onPressed: () {
-                            setState(() {
-                              _isHidden = !_isHidden;
-                            });
-                          },
-                        )
+                    SizedBox(height: 20.0),
+                    TextFormField(
+                      validator: (values) => !_confirmPassword ? 'Password is not matching' : null,
+                      decoration:  InputDecoration(
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 5.0
+                              )
+                          ),
+                          labelText: "Confirm Password",
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                _isHidden = !_isHidden;
+                              });
+                            },
+                          )
+                      ),
+                      keyboardType: TextInputType.text,
+                      obscureText: _isHidden,
+                      onChanged: (value){
+                        setState(() {
+                          if(value == password){
+                            _confirmPassword = true;
+                          }else{
+                            _confirmPassword = false;
+                          }
+                          // print(password);
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.text,
-                    obscureText: _isHidden,
-                    onChanged: (value){
-                      setState(() {
-                        password = value;
-                        // print(password);
-                      });
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.only(top: 3, left: 3),
@@ -181,7 +194,11 @@ class _SignupPageState extends State<SignupPage> {
                 child: MaterialButton(
                   minWidth: double.infinity,
                   height: 60,
-                  onPressed: () {},
+                  onPressed: () async{
+                    if(_formKey.currentState!.validate()){
+
+                    }
+                  },
                   color: Colors.redAccent,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
