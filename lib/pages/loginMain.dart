@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/pages/signup.dart';
@@ -11,13 +10,10 @@ class loginMain extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-
-
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Column(
-
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
