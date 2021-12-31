@@ -1,15 +1,15 @@
 import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/models/video.dart';
 
-User currentUser = User('stackedlist', "https://picsum.photos/id/1062/400/400");
+TheUser currentUser = TheUser('stackedlist', "https://picsum.photos/id/1062/400/400");
 
-User demoUser1 = User('user_1', "https://picsum.photos/id/1062/400/400");
+TheUser demoUser1 = TheUser('user_1', "https://picsum.photos/id/1062/400/400");
 
-User demoUser2 = User("user_2", "https://picsum.photos/id/1062/400/400");
+TheUser demoUser2 = TheUser("user_2", "https://picsum.photos/id/1062/400/400");
 
-User demoUser3 = User("user_3", "https://picsum.photos/id/1062/400/400");
+TheUser demoUser3 = TheUser("user_3", "https://picsum.photos/id/1062/400/400");
 
-User demoUser4 = User("user_4", "https://picsum.photos/id/1062/400/400");
+TheUser demoUser4 = TheUser("user_4", "https://picsum.photos/id/1062/400/400");
 
 
 final List<Video> videos = [

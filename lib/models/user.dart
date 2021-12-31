@@ -1,7 +1,13 @@
-class User {
+class TheUser {
   final String username;
   final String profileimageUrl;
+  //final String uid;
 
-  User(this.username, this.profileimageUrl);
+  TheUser(this.username, this.profileimageUrl);
 
+}
+
+class Person {
+  final String uid;
+  Person({required this.uid});
 }

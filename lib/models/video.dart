@@ -2,7 +2,7 @@ import 'package:social_media_app/models/user.dart';
 
 class Video {
   final String videoUrl;
-  final User postedBy;
+  final TheUser postedBy;
   final String caption;
   final String audioName;
   final String likes;

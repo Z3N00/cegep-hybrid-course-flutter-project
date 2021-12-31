@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_media_app/pages/signin.dart';
+import 'package:social_media_app/services/auth.dart';
 
 class SignupPage extends StatefulWidget {
 
@@ -9,10 +11,12 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
+  String error = '';
 
   late bool _isHidden = true;
   late bool _confirmPassword = false;
@@ -110,7 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
-                        validator: (value) => value!.length < 6 ? 'Enter a password of 6 or more characters' : null,
+                      validator: (value) => value!.length < 6 ? 'Enter a password of 6 or more characters' : null,
                       decoration:  InputDecoration(
                           border: const OutlineInputBorder(
                               borderSide: BorderSide(
@@ -196,7 +200,18 @@ class _SignupPageState extends State<SignupPage> {
                   height: 60,
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
-
+                        dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                        print(result);
+                        if(result == null){
+                          setState(() {
+                            error = 'Please supply valid email ';
+                            Fluttertoast.showToast(
+                              msg: error,
+                              toastLength: Toast.LENGTH_LONG,
+                              //gravity: ToastGravity.CENTER
+                            );
+                          });
+                        }
                     }
                   },
                   color: Colors.redAccent,

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:social_media_app/fullScreenVideo.dart';
@@ -7,9 +8,11 @@ import 'package:social_media_app/pages/loginMain.dart';
 //late List<CameraDescription> cameras;
 
 
-void main()  {
+void main() async {
   //WidgetsFlutterBinding.ensureInitialized();
   //cameras = await availableCameras();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
