@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "775722077000",
+    "project_id": "fluttersocialmediaapp-af8a4",
+    "storage_bucket": "fluttersocialmediaapp-af8a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775722077000:android:f0306df996a4dc4c1f017d",
+        "android_client_info": {
+          "package_name": "com.example.social_media_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775722077000-snct5hma7h2vass9q49u1usg76opup1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.social_media_app",
+            "certificate_hash": "149e42231ada35ecc0eb622d79ed10ddb16954c0"
+          }
+        },
+        {
+          "client_id": "775722077000-h3jbu5s1l9pvo1tp3h5ubt8dnq0ug4pq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOeJBn3nLrF7y-3AvgnZbcJEOivBbbgKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775722077000-h3jbu5s1l9pvo1tp3h5ubt8dnq0ug4pq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
