@@ -190,8 +190,6 @@ class _SignupPageState extends State<SignupPage> {
                       left: BorderSide(color: Colors.black),
                       right: BorderSide(color: Colors.black),
 
-
-
                     )
 
                 ),
@@ -211,6 +209,10 @@ class _SignupPageState extends State<SignupPage> {
                               //gravity: ToastGravity.CENTER
                             );
                           });
+                          // Need to check and correct the else if method
+                        }else if(result != null){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                          Fluttertoast.showToast(msg: "Account registered successfully");
                         }
                     }
                   },

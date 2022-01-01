@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_media_app/models/user_login.dart';
 import 'package:social_media_app/navigation_container.dart';
 import 'package:social_media_app/pages/signup.dart';
+import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/widgets/loading.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -13,19 +16,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
+  String error = '';
 
   late bool _isHidden = true;
+  bool loading = false;
 
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading(): Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -71,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           TextFormField(
+                            validator: (value) => value!.isEmpty ? 'Enter an Email' : null,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -95,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
 
                           TextFormField(
+                            validator: (value) => value!.length < 6 ? 'Enter a password of 6 or more characters' : null,
                             decoration:  InputDecoration(
                               border: const OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -145,8 +152,25 @@ class _LoginPageState extends State<LoginPage> {
                       child: MaterialButton(
                         minWidth: double.infinity,
                         height: 60,
-                        onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationContainer()));
+                        onPressed: () async{
+                          if(_formKey.currentState!.validate()){
+                            setState(() => loading = true);
+                              dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                            if(result == null) {
+                              setState(() {
+                                error = 'Could Not Sign In With Those Credentials ';
+                                loading = false;
+                                Fluttertoast.showToast(
+                                  msg: error,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  //gravity: ToastGravity.CENTER
+                                );
+                              });
+                            }else if(result != null){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationContainer()));
+                            }
+                          }
+
                         },
                         color: Colors.redAccent,
                         elevation: 0,
