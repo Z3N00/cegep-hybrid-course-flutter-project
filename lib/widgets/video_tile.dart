@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/models/video.dart';
+import 'package:social_media_app/services/database.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoTile extends StatefulWidget {
-  const VideoTile({Key? key, required this.video, required this.snappedPageIndex, required this.currentIndex}) : super(key: key);
-  final Video video;
+  final VideosOne VideoList;
+  const VideoTile({Key? key, required this.snappedPageIndex, required this.currentIndex, required this.VideoList}) : super(key: key);
+
   final int snappedPageIndex;
   final int currentIndex;
 
@@ -21,14 +23,14 @@ class _VideoTileState extends State<VideoTile> {
 
   @override
   void initState() {
-    _videoPlayerController = VideoPlayerController.asset("assets/${widget.video.videoUrl}");
+    _videoPlayerController = VideoPlayerController.network("${widget.VideoList.video}");
     _initializeVideoPlayer = _videoPlayerController.initialize();
     _videoPlayerController.setLooping(true);
       setState(() {
       //  _videoPlayerController.play();
         _videoPlayerController.setLooping(true);
       });
-
+print("Video Name : ${widget.VideoList.video}");
     super.initState();
   }
 

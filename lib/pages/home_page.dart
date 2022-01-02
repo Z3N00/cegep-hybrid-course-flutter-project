@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
 import 'package:social_media_app/models/video.dart';
+import 'package:social_media_app/services/database.dart';
 import 'package:social_media_app/widgets/home_side_bar.dart';
 import 'package:social_media_app/widgets/video_detail.dart';
 import 'package:social_media_app/widgets/video_tile.dart';
@@ -18,6 +19,26 @@ class _HomePageState extends State<HomePage> {
 
   bool _isFollowingSelected = true;
   int _snappedPageIndex = 0;
+
+  List<VideosOne> videoList = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchVideosData();
+  }
+
+  fetchVideosData() async {
+    dynamic result = await DatabaseManager().getItemList();
+    if (result == null) {
+      print("Video list null");
+    } else {
+      setState(() {
+        videoList = result;
+      });
+    }
+    print('videos:${videoList.length}');
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +83,14 @@ class _HomePageState extends State<HomePage> {
           }),
         },
         scrollDirection: Axis.vertical,
-        itemCount: videos.length,
+        itemCount: videoList.length,
         itemBuilder: (context, index){
         return Stack(
           alignment: Alignment.bottomCenter,
           children: [
             VideoTile(
-                video: videos[index],
+                VideoList :videoList[index],
+                // video: videos[index],
                 currentIndex: index,
                 snappedPageIndex: _snappedPageIndex,
             ),

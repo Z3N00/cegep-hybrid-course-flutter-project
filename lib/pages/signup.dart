@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/widgets/loading.dart';
 
 class SignupPage extends StatefulWidget {
 
@@ -20,10 +21,11 @@ class _SignupPageState extends State<SignupPage> {
 
   late bool _isHidden = true;
   late bool _confirmPassword = false;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -198,11 +200,15 @@ class _SignupPageState extends State<SignupPage> {
                   height: 60,
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
+                      setState(() {
+                        loading = true;
+                      });
                         dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                        // print("RESULT : "+ result);
                         if(result == null) {
                           setState(() {
                             error = 'Please give a valid email ';
+                            loading = false;
                             Fluttertoast.showToast(
                               msg: error,
                               toastLength: Toast.LENGTH_LONG,
