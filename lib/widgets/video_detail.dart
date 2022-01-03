@@ -5,12 +5,14 @@ import 'package:marquee/marquee.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
 //import 'package:social_media_app/_mock_data/mock.dart';
 import 'package:social_media_app/models/video.dart';
+import 'package:social_media_app/services/database.dart';
 
 
 class VideoDetail extends StatelessWidget {
+  final VideosOne videosOne;
+  const VideoDetail({Key? key,  required this.videosOne}) : super(key: key);
+  //final Video video;
 
-  const VideoDetail({Key? key, required this.video}) : super(key: key);
-  final Video video;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class VideoDetail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text("@${video.postedBy.username}",
+          Text("@${videosOne.username}",
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontSize: 15,
               color: Colors.white,
@@ -30,7 +32,7 @@ class VideoDetail extends StatelessWidget {
           const SizedBox(
             height: 8.0,
           ),
-          ExpandableText(video.caption,
+          ExpandableText(videosOne.caption.toString(),
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontSize: 13,
                 color: Colors.white,
@@ -58,7 +60,7 @@ class VideoDetail extends StatelessWidget {
                 height: 20,
                 width: MediaQuery.of(context).size.width/2,
                 child: Marquee(
-                  text: "${video.audioName}   *    ",
+                  text: "${videosOne.audio}   *    ",
                   velocity: 8,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontSize: 13,

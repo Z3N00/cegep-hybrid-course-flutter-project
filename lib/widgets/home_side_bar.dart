@@ -2,10 +2,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:social_media_app/models/video.dart';
+import 'package:social_media_app/services/database.dart';
 
 class HomeSideBar extends StatefulWidget {
-  const HomeSideBar({Key? key, required this.video}) : super(key: key);
-  final Video video;
+  const HomeSideBar({Key? key, required this.videoOne}) : super(key: key);
+  final VideosOne videoOne;
 
   @override
   State<HomeSideBar> createState() => _HomeSideBarState();
@@ -42,9 +43,9 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _profileImageButton(widget.video.postedBy.profileimageUrl),
-          _sideBarItem('heart', widget.video.likes, style),
-          _sideBarItem("comment", widget.video.comments, style),
+          _profileImageButton(widget.videoOne.imageUrl.toString()),
+          _sideBarItem('heart', widget.videoOne.likes.toString(), style),
+          _sideBarItem("comment", widget.videoOne.comments.toString(), style),
           _sideBarItem("share", "Share", style),
           AnimatedBuilder(
             child: Stack(
@@ -57,7 +58,7 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
                 ),
                 CircleAvatar(
                   radius: 12,
-                  backgroundImage:NetworkImage(widget.video.postedBy.profileimageUrl),
+                  backgroundImage:NetworkImage(widget.videoOne.imageUrl.toString()),
                 )
               ],),
             animation: _animationController, builder: (context, child){

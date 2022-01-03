@@ -102,13 +102,13 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height / 4,
                       //color: Colors.amber,
-                      child: VideoDetail(video: videos[index],),
+                      child: VideoDetail(videosOne: videosList[index],),
                     )
                 ),
                 Expanded(
                     child: Container(
                       height: MediaQuery.of(context).size.height / 1.75,
-                      child: HomeSideBar(video: videos[index],),
+                      child: HomeSideBar(videoOne: videoList[index],),
                      // color: Colors.pink,
                     )
                 ),

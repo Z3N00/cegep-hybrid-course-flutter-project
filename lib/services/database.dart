@@ -1,26 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:social_media_app/models/video.dart';
 
-class DatabaseService {
-
-
-  late final String uid;
-  DatabaseService({required this.uid});
-
-  // collection reference
-  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('users');
-
-  Future updateUserdata(String videoUrl, String postedBy, String caption, String audioName, int likes, int comments) async{
-    return collectionReference.doc(uid);
-  }
-
-}
-
 
 class VideosOne{
-  String? audio,caption,video,username;
+  String? audio,caption,video,username,imageUrl;
   int? comments,likes;
-  VideosOne({this.audio,this.caption,this.video,this.username,this.comments,this.likes});
+  VideosOne({this.audio,this.caption,this.video,this.username,this.comments,this.likes, this.imageUrl});
 }
 List<VideosOne> videosList = [];
 
@@ -41,6 +26,7 @@ class DatabaseManager {
           itemEntity.username = data['username'];
           itemEntity.comments = data['comments'];
           itemEntity.likes = data['likes'];
+          itemEntity.imageUrl = data['imageUrl'];
 
           videosList.add(itemEntity);
         } else {
