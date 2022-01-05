@@ -15,7 +15,9 @@ class HomeSideBar extends StatefulWidget {
 class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStateMixin {
 
   late AnimationController _animationController;
-
+  bool likeButtonCliked=false;
+  String heart = "heart";
+  String heart1 = "heart1";
   @override
   void initState() {
     _animationController = AnimationController(
@@ -37,6 +39,7 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     TextStyle style =   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13, color: Colors.white);
+    TextStyle style1 =   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13, color: Colors.red);
     return Padding(
       padding: EdgeInsets.only(right: 8.0),
       child: Column(
@@ -46,6 +49,19 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
           _profileImageButton(widget.videoOne.imageUrl.toString()),
           GestureDetector(
             child: _sideBarItem('heart', widget.videoOne.likes.toString(), style),
+
+            onTap: () => {
+              setState((){
+                likeButtonCliked=true;
+              })
+            },
+            onDoubleTap: () => {
+              setState((){
+                likeButtonCliked=false;
+              })
+
+            },
+
           ),
 
           _sideBarItem("comment", widget.videoOne.comments.toString(), style),
@@ -79,7 +95,6 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
   _sideBarItem(String iconName, String label, TextStyle style){
     return Column(
       children: [
-
   SvgPicture.asset('assets/$iconName.svg'),
   SizedBox(height: 5.0,),
   Text(label, style: style,)
