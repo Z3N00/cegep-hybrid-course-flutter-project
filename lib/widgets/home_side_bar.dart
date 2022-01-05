@@ -48,20 +48,19 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
         children: [
           _profileImageButton(widget.videoOne.imageUrl.toString()),
           GestureDetector(
-            child: _sideBarItem('heart', widget.videoOne.likes.toString(), style),
-
             onTap: () => {
               setState((){
                 likeButtonCliked=true;
               })
+
             },
+            child:_sideBarItem(likeButtonCliked?heart1:heart, widget.videoOne.likes.toString(), style),
             onDoubleTap: () => {
               setState((){
                 likeButtonCliked=false;
               })
 
             },
-
           ),
 
           _sideBarItem("comment", widget.videoOne.comments.toString(), style),
