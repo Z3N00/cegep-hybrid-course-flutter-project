@@ -44,7 +44,10 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           _profileImageButton(widget.videoOne.imageUrl.toString()),
-          _sideBarItem('heart', widget.videoOne.likes.toString(), style),
+          GestureDetector(
+            child:_sideBarItem('heart', widget.videoOne.likes.toString(), style),
+          ),
+
           _sideBarItem("comment", widget.videoOne.comments.toString(), style),
           _sideBarItem("share", "Share", style),
           AnimatedBuilder(
@@ -77,9 +80,10 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
     return Column(
       children: [
 
-        SvgPicture.asset('assets/$iconName.svg'),
-        SizedBox(height: 5.0,),
-        Text(label, style: style,)
+  SvgPicture.asset('assets/$iconName.svg'),
+  SizedBox(height: 5.0,),
+  Text(label, style: style,)
+
       ],
     );
   }
