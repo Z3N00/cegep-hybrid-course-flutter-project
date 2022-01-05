@@ -1,7 +1,9 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:social_media_app/models/user.dart';
-//import 'package:flutterauth/models/user.dart';
-//import 'package:flutterauth/models/user.dart';
+import 'package:social_media_app/pages/loginMain.dart';
 
 class AuthService {
 
@@ -15,10 +17,10 @@ class AuthService {
 
   // auth chnage user stream
 
-  // Stream<TheUser?> get user {
-  //   return _auth.authStateChanges()
-  //       .map((User? user) => _userFromFirebaseUser(user));
-  // }
+  Stream<Person?> get user {
+    return _auth.authStateChanges()
+        .map((User? user) => _userFromFirebaseUser(user));
+  }
 
   // sign in anonymously
   // Future signInAnon() async {
@@ -67,7 +69,9 @@ class AuthService {
   // sign out
   Future signOut() async {
     try{
+      loginMain();
       return await _auth.signOut();
+
     }catch(e){
       print(e.toString());
       return null;

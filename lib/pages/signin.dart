@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/models/user_login.dart';
 import 'package:social_media_app/navigation_container.dart';
+import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/pages/signup.dart';
 import 'package:social_media_app/services/auth.dart';
 import 'package:social_media_app/widgets/loading.dart';
@@ -156,6 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                           if(_formKey.currentState!.validate()){
                             setState(() => loading = true);
                               dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                              //dynamic  user = Provider.of<Person?>(context);
+                             // print("user Value: " + user);
                             if(result == null) {
                               setState(() {
                                 error = 'Could Not Sign In With Those Credentials ';
@@ -169,6 +174,9 @@ class _LoginPageState extends State<LoginPage> {
                             }else if(result != null){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationContainer()));
                             }
+                            // else if(user == null){
+                            //   Navigator.push(context, MaterialPageRoute(builder: (context)=> loginMain()));
+                            // }
                           }
 
                         },

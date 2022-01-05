@@ -1,11 +1,22 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
+import 'package:social_media_app/pages/loginMain.dart';
+import 'package:social_media_app/services/auth.dart';
 
 
-
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +34,8 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget appBar() {
-    return AppBar(elevation: 0,
+    return AppBar(
+      elevation: 0,
       backgroundColor: Colors.white,
       flexibleSpace: SafeArea(
         child: Column(
@@ -42,21 +54,36 @@ class ProfilePage extends StatelessWidget {
                   height: 70,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(37),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           image:AssetImage("assets/user.jpg"),
                           fit: BoxFit.cover)
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 10,),
-            Text("User",
+            const SizedBox(height: 10,),
+            const Text("User",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),),
-            SizedBox(height: 10,),
-            Text("@user431", style: TextStyle(fontSize: 16,color: Colors.black,),),
+            const SizedBox(height: 10,),
+            const Text("@user431", style: TextStyle(fontSize: 16,color: Colors.black,),),
           ],
         ),
       ),
+      actions: <Widget>[
+        FlatButton.icon(
+            onPressed: ()async{
+              await _auth.signOut();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
+              Fluttertoast.showToast(
+                msg: "Logout Successfully",
+                toastLength: Toast.LENGTH_LONG,
+                //gravity: ToastGravity.CENTER
+              );
+
+            },
+            icon: Icon(Icons.person),
+            label: Text("Logout"))
+      ],
     );
   }
 
