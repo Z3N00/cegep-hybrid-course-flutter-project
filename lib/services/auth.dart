@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 
@@ -77,4 +78,6 @@ class AuthService {
       return null;
     }
   }
+
+
 }

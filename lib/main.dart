@@ -25,10 +25,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
 
+
   @override
   Widget build(BuildContext context) {
 
-    dynamic user = Provider.of<Person?>(context);
+    final user = Provider.of<Person?>(context);
     //print("user:  $user");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
       home: user == null ? loginMain() : NavigationContainer(), //NavigationConatiner()
     );
   }
+
+
 
 }
 

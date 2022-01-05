@@ -3,7 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
+import 'package:social_media_app/main.dart';
+import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/services/auth.dart';
 
@@ -17,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final AuthService _auth = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget appBar() {
+  Widget appBar()  {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -73,6 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
         FlatButton.icon(
             onPressed: ()async{
               await _auth.signOut();
+
               Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
               Fluttertoast.showToast(
                 msg: "Logout Successfully",

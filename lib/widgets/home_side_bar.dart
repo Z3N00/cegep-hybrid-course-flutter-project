@@ -54,7 +54,7 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
               })
 
             },
-            child:_sideBarItem(likeButtonCliked?heart1:heart, widget.videoOne.likes.toString(), style),
+            child:_sideBarItem(likeButtonCliked ? heart1 : heart, widget.videoOne.likes.toString(), style),
             onDoubleTap: () => {
               setState((){
                 likeButtonCliked=false;
