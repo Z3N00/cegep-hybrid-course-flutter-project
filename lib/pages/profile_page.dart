@@ -1,13 +1,16 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
 import 'package:social_media_app/main.dart';
 import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/pages/loginMain.dart';
+import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/services/auth.dart';
 
 
@@ -22,8 +25,14 @@ class _ProfilePageState extends State<ProfilePage> {
   final AuthService _auth = AuthService();
 
 
+  AccessToken? _accessToken;
+  UserModel? _currentUser;
+
   @override
   Widget build(BuildContext context) {
+
+
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -37,7 +46,23 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+
+  // case FacebookLoginStatus.loggedIn:
+  // print("LoggedIn");
+  //
+  // var graphResponse = await http.get(
+  // 'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${facebookLoginResult
+  //     .accessToken.token}');
+  //
+  // var profile = json.decode(graphResponse.body);
+  // print(profile.toString());
+  //
+  // onLoginStatusChanged(true, profileData: profile);
+  // break;
+
+
   Widget appBar()  {
+    UserModel? user = _currentUser;
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -59,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(37),
                       image: const DecorationImage(
-                          image:AssetImage("assets/user.jpg"),
+                          image: AssetImage("assets/user.jpg"),
                           fit: BoxFit.cover)
                   ),
                 ),
@@ -100,13 +125,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
       child: Column(
         children: [
-          SizedBox(height: 30,
+          const SizedBox(height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: [
+                children: const [
                   Text("Posts",
                       style: TextStyle(fontSize: 15, color: Colors.black)
                   ),
@@ -117,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               Column(
-                children: [
+                children: const [
                   Text("Followers",
                       style: TextStyle(fontSize: 15, color: Colors.black)
                   ),
@@ -128,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               Column(
-                children: [
+                children: const [
                   Text("Following",
                       style: TextStyle(fontSize: 15, color: Colors.black)
                   ),
@@ -153,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: BoxDecoration(image: DecorationImage(
                     image:NetworkImage(imgList[index]),
                     fit: BoxFit.cover)),
-                child: Center(
+                child: const Center(
                   child: Icon(Icons.play_circle_outline,size: 40,color: Colors.white),
 
                 ),
@@ -165,3 +190,4 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
