@@ -33,7 +33,7 @@ class _TestMeState extends State<TestMe> {
                       borderRadius: new BorderRadius.all(Radius.circular(50))),
                   child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
+                      backgroundImage: NetworkImage(data[i]['pic'])),
                 ),
               ),
               title: Text(
@@ -51,7 +51,7 @@ class _TestMeState extends State<TestMe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Comment Page"),
+        title: Text("Comment"),
         backgroundColor: Colors.black,
       ),
       body: Container(
