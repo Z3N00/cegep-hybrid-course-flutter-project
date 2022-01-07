@@ -39,8 +39,11 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+
+    int value = int.parse(widget.videoOne.likes.toString())+1;
+
     TextStyle style =   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13, color: Colors.white);
-    TextStyle style1 =   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13, color: Colors.red);
+    //TextStyle style1 =   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13, color: Colors.red);
 
     return Padding(
       padding: EdgeInsets.only(right: 8.0),
@@ -57,7 +60,14 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
 
             },
 
-            child:_sideBarItem(likeButtonCliked ? heart1 : heart, widget.videoOne.likes.toString(), style),
+
+           // child:_sideBarItem(likeButtonCliked ? heart1 : heart, widget.videoOne.likes.toString(), style),
+
+
+            child:_sideBarItem(likeButtonCliked ? heart1 : heart,
+                likeButtonCliked? value.toString() : widget.videoOne.likes.toString(),
+                style),
+
             onDoubleTap: () => {
               setState((){
                 likeButtonCliked=false;

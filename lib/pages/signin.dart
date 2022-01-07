@@ -179,8 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                             setState(() => loading = true);
                             dynamic result = await _auth
                                 .signInWithEmailAndPassword(email, password);
-                            //dynamic  user = Provider.of<Person?>(context);
-                            // print("user Value: " + user);
+
                             if (result == null) {
                               setState(() {
                                 error =
@@ -265,16 +264,27 @@ Future<void> signIn() async {
 
     if(result.status == LoginStatus.success){
       _accessToken = result.accessToken;
-
+      
       final data = await FacebookAuth.i.getUserData();
       UserModel model = UserModel.fromJson(data);
 
       _currentUser = model;
       setState(() {
+        loading = true;
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => NavigationContainer()));
       });
     }
+}
+
+Future<void> logOut() async {
+    await FacebookAuth.i.logOut();
+    _currentUser = null;
+    _accessToken = null;
+    setState(() {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => loginMain()));
+    });
 }
 
 }

@@ -1,28 +1,23 @@
 import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/models/video.dart';
 
-TheUser currentUser = TheUser('stackedlist', "https://picsum.photos/id/1062/400/400");
+//TheUser currentUser = TheUser('stackedlist', "https://picsum.photos/id/1062/400/400");
 
-TheUser demoUser1 = TheUser('user_1', "https://picsum.photos/id/1062/400/400");
+//TheUser demoUser1 = TheUser('user_1', "https://picsum.photos/id/1062/400/400");
 
-TheUser demoUser2 = TheUser("user_2", "https://picsum.photos/id/1062/400/400");
-
-TheUser demoUser3 = TheUser("user_3", "https://picsum.photos/id/1062/400/400");
-
-TheUser demoUser4 = TheUser("user_4", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser5 = TheUser("user_5", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser6 = TheUser("user_6", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser7 = TheUser("user_7", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser8 = TheUser("user_8", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser9 = TheUser("user_9", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser10 = TheUser("user_10", "https://picsum.photos/id/1062/400/400");
-TheUser demoUser11 = TheUser("user_11", "https://picsum.photos/id/1062/400/400");
-
-final List<Video> videos = [
-  Video("video0.mp4", demoUser1, "caption", "audioName", "123M", "123k"),
-  Video("video1.mp4", demoUser2, "caption", "audioName", "12", "10"),
-  Video("video3", demoUser3, "caption", "audioName", "100", "12"),
-];
+// TheUser demoUser2 = TheUser("user_2", "https://picsum.photos/id/1062/400/400");
+//
+// TheUser demoUser3 = TheUser("user_3", "https://picsum.photos/id/1062/400/400");
+//
+// TheUser demoUser4 = TheUser("user_4", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser5 = TheUser("user_5", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser6 = TheUser("user_6", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser7 = TheUser("user_7", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser8 = TheUser("user_8", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser9 = TheUser("user_9", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser10 = TheUser("user_10", "https://picsum.photos/id/1062/400/400");
+// TheUser demoUser11 = TheUser("user_11", "https://picsum.photos/id/1062/400/400");
+//
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
