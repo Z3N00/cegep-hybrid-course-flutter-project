@@ -58,7 +58,6 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
 
             },
 
-
             child:_sideBarItem(likeButtonCliked ? heart1 : heart,
                 likeButtonCliked? value.toString() : widget.videoOne.likes.toString(),
                 style),

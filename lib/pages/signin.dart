@@ -221,6 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     child: const Text("Login with Facebook"),
                     onPressed: signIn
+
                   ),
 
 
@@ -260,7 +261,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 Future<void> signIn() async {
-    final LoginResult result = await FacebookAuth.i.login();
+
+  UserModel? user = _currentUser;
+
+  final LoginResult result = await FacebookAuth.i.login();
 
     if(result.status == LoginStatus.success){
       _accessToken = result.accessToken;
@@ -271,8 +275,10 @@ Future<void> signIn() async {
       _currentUser = model;
       setState(() {
         loading = true;
+       // print("Profile name : ${user!.name}");
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => NavigationContainer()));
+
       });
     }
 }
@@ -288,6 +294,9 @@ Future<void> logOut() async {
 }
 
 }
+
+
+
 
 class UserModel {
   final String? email;
