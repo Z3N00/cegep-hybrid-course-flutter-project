@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share/share.dart';
 import 'package:social_media_app/models/video.dart';
 import 'package:social_media_app/services/database.dart';
 
@@ -61,7 +62,9 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
             },
 
 
+
            // child:_sideBarItem(likeButtonCliked ? heart1 : heart, widget.videoOne.likes.toString(), style),
+
 
 
             child:_sideBarItem(likeButtonCliked ? heart1 : heart,
@@ -77,7 +80,13 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
           ),
 
           _sideBarItem("comment", widget.videoOne.comments.toString(), style),
-          _sideBarItem("share", "Share", style),
+
+    GestureDetector(
+    onTap: () => {
+    Share.share("https://play.google.com/store/apps/details?id=com.instructivetech.testapp"),
+    },
+         child: _sideBarItem("share", "Share", style),
+    ),
           AnimatedBuilder(
             child: Stack(
               alignment: Alignment.center,

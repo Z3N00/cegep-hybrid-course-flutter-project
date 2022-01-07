@@ -1,6 +1,8 @@
 
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -12,6 +14,7 @@ import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/services/firebase_api.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -28,11 +31,13 @@ class _ProfilePageState extends State<ProfilePage> {
   AccessToken? _accessToken;
   UserModel? _currentUser;
 
+  File? file;
+
   @override
   Widget build(BuildContext context) {
 
 
-
+    final fileName = file != null ? basename(file!.path) : "No File Selected";
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -78,14 +83,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   border: Border.all(color: Colors.black)
               ),
               child: Center(
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(37),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/user.jpg"),
-                          fit: BoxFit.cover)
+                child: GestureDetector(
+                  onTap: selectFile,
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(37),
+                        image: const DecorationImage(
+                            image: AssetImage("assets/user.jpg"),
+                            fit: BoxFit.cover)
+                    ),
                   ),
                 ),
               ),
@@ -189,5 +197,32 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if(result == null) return;
+    final path = result.files.single.path!;
+    setState(() => file = File(path));
+
+    setState(() {
+      uploadFile();
+    });
+  }
+
+
+  Future uploadFile() async {
+    if(file == null) return;
+
+    final fileName = basename(file!.path);
+    final destination = 'files/$fileName';
+
+    FirebaseApi.uploadFile(destination, file!);
+  }
+
+  basename(String path) {
+    return path;
+  }
+
 }
 
