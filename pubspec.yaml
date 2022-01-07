@@ -37,6 +37,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   flutter_facebook_auth: ^3.5.7
   share: ^2.0.4
+  comment_box : ^0.0.14
   firebase_storage:
 
   file_picker:

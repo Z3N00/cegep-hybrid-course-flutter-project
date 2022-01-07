@@ -2,8 +2,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
-import 'package:social_media_app/models/video.dart';
+import 'package:social_media_app/pages/comment_page.dart';
+//import 'package:social_media_app/models/video.dart';
 import 'package:social_media_app/services/database.dart';
+
 
 class HomeSideBar extends StatefulWidget {
   const HomeSideBar({Key? key, required this.videoOne}) : super(key: key);
@@ -78,9 +80,11 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
 
             },
           ),
-
-          _sideBarItem("comment", widget.videoOne.comments.toString(), style),
-
+    GestureDetector(
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TestMe())
+    ),
+          child:_sideBarItem("comment", widget.videoOne.comments.toString(), style),
+    ),
     GestureDetector(
     onTap: () => {
     Share.share("https://play.google.com/store/apps/details?id=com.instructivetech.testapp"),
