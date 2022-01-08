@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">943577089626159</string>
-    <string name="fb_login_protocol_scheme">fb943577089626159</string>
-    <string name="app_name">flutter social media</string>
+    <string name="facebook_app_id">356417629155156</string>
+    <string name="fb_login_protocol_scheme">fb356417629155156</string>
+
+    <string name="app_name">frenzy</string>
 </resources>
