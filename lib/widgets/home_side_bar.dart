@@ -80,12 +80,12 @@ class _HomeSideBarState extends State<HomeSideBar> with SingleTickerProviderStat
 
             },
           ),
-    GestureDetector(
+          GestureDetector(
           onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TestMe())
     ),
           child:_sideBarItem("comment", widget.videoOne.comments.toString(), style),
     ),
-    GestureDetector(
+            GestureDetector(
     onTap: () => {
     Share.share("https://play.google.com/store/apps/details?id=com.instructivetech.testapp"),
     },

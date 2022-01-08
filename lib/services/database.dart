@@ -8,7 +8,43 @@ class VideosOne{
   VideosOne({this.audio,this.caption,this.video,this.username,this.comments,this.likes, this.imageUrl});
 }
 List<VideosOne> videosList = [];
+class InboxDatabase{
+  String? imageURL,name,text;
+  bool? unread;
+  InboxDatabase({this.imageURL,this.name,this.text,this.unread});
+}
+List<InboxDatabase> chatList = [];
 
+class UsersDatabaseManager{
+  Future getItemList() async {
+    final CollectionReference users =
+    FirebaseFirestore.instance.collection('Inbox');
+    try{
+      chatList.clear();
+      var snapshot1 = await users.get();
+      snapshot1.docs.forEach((element) {
+        Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
+        if (data != null) {
+          var itemEntity = InboxDatabase();
+          itemEntity.imageURL = data['imageURL'];
+          itemEntity.name = data['name'];
+          itemEntity.text = data['text'];
+          itemEntity.unread = data['unread'];
+
+
+          chatList.add(itemEntity);
+        } else {
+          print("error:");
+        }
+      });
+      return chatList;
+    }
+    catch (e) {
+      print("Error : ${e.toString()}");
+      return [];
+    }
+  }
+}
 class DatabaseManager {
   Future getItemList() async {
     final CollectionReference flowers =

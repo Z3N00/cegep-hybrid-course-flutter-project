@@ -2,11 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:social_media_app/models/message_model.dart';
-import 'package:social_media_app/models/user_model.dart';
+import 'package:social_media_app/services/database.dart';
 import 'package:social_media_app/pages/chat_screen.dart';
-class InboxPage extends StatelessWidget {
+class InboxPage extends StatefulWidget {
   const InboxPage({Key? key}) : super(key: key);
 
+  @override
+  State<InboxPage> createState() => _InboxPage();
+}
+class _InboxPage extends State<InboxPage>{
+
+  List<InboxDatabase> chatList = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchVideosData();
+  }
+
+  fetchVideosData() async {
+    dynamic result = await UsersDatabaseManager().getItemList();
+    if (result == null) {
+      print("Video list null");
+    } else {
+      setState(() {
+        chatList = result;
+      });
+    }
+    print('Inbox:${chatList.length}');
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -27,7 +50,7 @@ class InboxPage extends StatelessWidget {
 
 
       body:ListView.builder(
-        itemCount: chats.length,
+        itemCount: chatList.length,
         itemBuilder:(BuildContext context, int index){
           final Message chat = chats[index];
         return GestureDetector(
@@ -63,7 +86,7 @@ class InboxPage extends StatelessWidget {
                 ),
                 child:CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage(chat.sender.imageUrl),
+                  backgroundImage: NetworkImage(chatList[index].imageURL.toString()),
                 ),
               ),
               Container(
@@ -77,17 +100,17 @@ class InboxPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
 
-                            Text(chat.sender.name, style: TextStyle(fontSize: 15,
+                            Text(chatList[index].name.toString(), style: TextStyle(fontSize: 15,
                                 fontWeight: FontWeight.bold
                             ),
                             ),
 
 
-                            Text(chat.time,style: TextStyle(
-                              fontSize:11,
-                              fontWeight:FontWeight.w300,
-                              color: Colors.black54,
-                            ),),
+                            // Text(chat.time,style: TextStyle(
+                            //   fontSize:11,
+                            //   fontWeight:FontWeight.w300,
+                            //   color: Colors.black54,
+                            // ),),
 
                       ],
                     ),
@@ -97,13 +120,13 @@ class InboxPage extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child:chat.unread?Text(chat.text,
+                      child:chat.unread ?Text(chatList[index].text.toString(),
                         style: TextStyle(fontSize: 13,
                             color: Colors.black,fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                         maxLines:2,
                       ):
-                      Text(chat.text,
+                      Text(chatList[index].text.toString(),
                         style: TextStyle(fontSize: 13,
                             color: Colors.black54),
                         overflow: TextOverflow.ellipsis,
