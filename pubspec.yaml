@@ -39,7 +39,7 @@ dependencies:
   share: ^2.0.4
   comment_box : ^0.0.14
   firebase_storage:
-
+  flutter_login_facebook: ^1.2.0
   file_picker:
 
 

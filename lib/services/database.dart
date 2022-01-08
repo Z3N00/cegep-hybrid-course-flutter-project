@@ -7,15 +7,16 @@ class VideosOne{
   int? comments,likes;
   VideosOne({this.audio,this.caption,this.video,this.username,this.comments,this.likes, this.imageUrl});
 }
+
 List<VideosOne> videosList = [];
 
 class DatabaseManager {
   Future getItemList() async {
-    final CollectionReference flowers =
+    final CollectionReference reference =
     FirebaseFirestore.instance.collection('Videos');
     try {
       videosList.clear();
-      var snapshot = await flowers.get();
+      var snapshot = await reference.get();
       snapshot.docs.forEach((element) {
         Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
         if (data != null) {
