@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -9,6 +10,7 @@ import 'package:social_media_app/navigation_container.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/pages/signup.dart';
 import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/services/fbsignin.dart';
 import 'package:social_media_app/widgets/loading.dart';
 
 
@@ -20,9 +22,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
 
+  final _formKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
+  final FB fb = FB();
   String email = '';
   String password = '';
   String error = '';
@@ -34,11 +37,10 @@ class _LoginPageState extends State<LoginPage> {
   UserModel? _currentUser;
 
 
-
   @override
   Widget build(BuildContext context) {
-
     UserModel? user = _currentUser;
+
 
     return loading ? Loading() : Scaffold(
       resizeToAvoidBottomInset: false,
@@ -219,8 +221,14 @@ class _LoginPageState extends State<LoginPage> {
                   Text("OR"),
 
                   ElevatedButton(
-                    child: const Text("Login with Facebook"),
-                    onPressed: signIn
+                      child: const Text("Login with Facebook"),
+                      onPressed: () async{
+                       await fb.fbSignIn();
+                       loading = true;
+                       Navigator.pop(context);
+                      }
+                        //loading = true;
+
 
                   ),
 
@@ -229,7 +237,6 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       const Text("Don't have an account?"),
-
                       GestureDetector(
                         child: const Text(" Sign up",
                             style: TextStyle(
@@ -260,44 +267,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-Future<void> signIn() async {
 
-  UserModel? user = _currentUser;
+  Future signIn() async {
+    UserModel? user = _currentUser;
 
-  final LoginResult result = await FacebookAuth.i.login();
-
-    if(result.status == LoginStatus.success){
+    final LoginResult result = await FacebookAuth.instance.login(
+        permissions: ['email']);
+    final OAuthCredential facebookAuthCredential = FacebookAuthProvider
+        .credential(result.accessToken!.token);
+    if (result.status == LoginStatus.success) {
       _accessToken = result.accessToken;
-      
-      final data = await FacebookAuth.i.getUserData();
+
+      final data = await FacebookAuth.instance.getUserData();
       UserModel model = UserModel.fromJson(data);
 
       _currentUser = model;
       setState(() {
         loading = true;
-       // print("Profile name : ${user!.name}");
+        // print("Profile name : ${user!.name}");
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => NavigationContainer()));
-
       });
     }
-}
-
-Future<void> logOut() async {
-    await FacebookAuth.i.logOut();
-    _currentUser = null;
-    _accessToken = null;
-    setState(() {
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => loginMain()));
-    });
-}
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
 
 }
-
-
-
-
 class UserModel {
   final String? email;
   final String? id;

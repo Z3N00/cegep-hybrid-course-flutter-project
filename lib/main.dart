@@ -9,6 +9,7 @@ import 'package:social_media_app/navigation_container.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/services/wrapper.dart';
 
 //late List<CameraDescription> cameras;
 
@@ -31,14 +32,19 @@ class MyApp extends StatelessWidget {
 
     final user = Provider.of<Person?>(context);
     //print("user:  $user");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Social Media App",
-      theme: ThemeData(
-       textTheme: GoogleFonts.varelaRoundTextTheme(),
-      ),
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => AuthService()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Social Media App",
+        theme: ThemeData(
+         textTheme: GoogleFonts.varelaRoundTextTheme(),
+        ),
 
-      home: user == null ? loginMain() : NavigationContainer(), //NavigationConatiner()
+        home: Wrapper(), //NavigationConatiner()
+      ),
     );
   }
 

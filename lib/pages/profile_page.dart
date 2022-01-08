@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -27,6 +28,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final AuthService _auth = AuthService();
 
+  UploadTask? task;
+  late String urlDownload = '';
 
   AccessToken? _accessToken;
   UserModel? _currentUser;
@@ -50,21 +53,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
     );
   }
-
-
-  // case FacebookLoginStatus.loggedIn:
-  // print("LoggedIn");
-  //
-  // var graphResponse = await http.get(
-  // 'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${facebookLoginResult
-  //     .accessToken.token}');
-  //
-  // var profile = json.decode(graphResponse.body);
-  // print(profile.toString());
-  //
-  // onLoginStatusChanged(true, profileData: profile);
-  // break;
-
 
   Widget appBar()  {
     UserModel? user = _currentUser;
@@ -110,8 +98,8 @@ class _ProfilePageState extends State<ProfilePage> {
         FlatButton.icon(
             onPressed: ()async{
               await _auth.signOut();
-
-              Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
+              await _auth.logOut();
+            //  Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
               Fluttertoast.showToast(
                 msg: "Logout Successfully",
                 toastLength: Toast.LENGTH_LONG,
@@ -217,7 +205,15 @@ class _ProfilePageState extends State<ProfilePage> {
     final fileName = basename(file!.path);
     final destination = 'files/$fileName';
 
-    FirebaseApi.uploadFile(destination, file!);
+    task = FirebaseApi.uploadFile(destination, file!);
+    setState(() {  });
+
+    if(task == null) return;
+
+    final snapshot = await task!.whenComplete(() {});
+    urlDownload =  await snapshot.ref.getDownloadURL();
+    print('Download link : $urlDownload');
+
   }
 
   basename(String path) {

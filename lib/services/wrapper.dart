@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/models/user.dart';
@@ -13,20 +14,14 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
-    return StreamBuilder<Person?>(
-        stream: authService.user,
-        builder: (_, AsyncSnapshot<Person?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            final Person? userAttributes = snapshot.data;
-            return userAttributes == null ? loginMain() : NavigationContainer();
-          } else {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
+  //  final authService = Provider.of<AuthService>(context);
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            return NavigationContainer();
+          } else
+            return loginMain();
         });
   }
 }
