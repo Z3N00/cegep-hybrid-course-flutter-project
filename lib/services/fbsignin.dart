@@ -5,8 +5,10 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 
 class FB{
+  final fb = FacebookLogin();
+
+
   fbSignIn() async {
-    final fb = FacebookLogin();
 
 // Log in
     final res = await fb.logIn(permissions: [
@@ -30,6 +32,7 @@ class FB{
 
         // Get user profile image url
         final imageUrl = await fb.getProfileImageUrl(width: 100);
+
         print('Your profile image: $imageUrl');
 
         // Get email (since we request email permission)
@@ -48,6 +51,50 @@ class FB{
         break;
     }
 
+
+  }
+
+  fbProfileImage() async {
+      final imageUrl = await fb.getProfileImageUrl(width: 100);
+      return imageUrl;
+  }
+  fbProfileName() async {
+    final profile = await fb.getUserProfile();
+    return profile!.name;
+  }
+  fbProfileEmail() async {
+    final email = await fb.getUserEmail();
+    if(email!= null){
+      return await email;
+    }else {
+      return "@User123";
+    }
+  }
+  fbLogInCheck() async {
+
+    final res = await fb.logIn(permissions: [
+      FacebookPermission.publicProfile,
+      FacebookPermission.email,
+    ]);
+    bool flag;
+
+    switch(res.status){
+      case FacebookLoginStatus.success:
+        flag = true;
+        break;
+
+      case FacebookLoginStatus.cancel:
+        // TODO: Handle this case.
+        flag = false;
+        break;
+
+      case FacebookLoginStatus.error:
+        // TODO: Handle this case.
+        flag = false;
+        break;
+
+    }
+    return flag;
 
   }
 }

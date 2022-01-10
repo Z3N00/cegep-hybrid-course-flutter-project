@@ -34,12 +34,13 @@ class _LoginPageState extends State<LoginPage> {
   bool loading = false;
   bool _isLoggenIn = false;
   AccessToken? _accessToken;
-  UserModel? _currentUser;
+
+//  UserModel? _currentUser;
 
 
   @override
   Widget build(BuildContext context) {
-    UserModel? user = _currentUser;
+    // UserModel? user = _currentUser;
 
 
     return loading ? Loading() : Scaffold(
@@ -222,12 +223,16 @@ class _LoginPageState extends State<LoginPage> {
 
                   ElevatedButton(
                       child: const Text("Login with Facebook"),
-                      onPressed: () async{
-                       await fb.fbSignIn();
-                       loading = true;
-                       Navigator.pop(context);
+                      onPressed: () async {
+                        await fb.fbSignIn();
+                        // print("Image Url : ${fb.fbProfileImage()}");
+                        // print("Face name : ${await fb.fbProfileName()}");
+                        // print("Face Email: ${await fb.fbProfileEmail()}");
+                        // print(" flag value: ${await fb.fbLogInCheck().toString()}");
+                        loading = true;
+                        Navigator.pop(context);
                       }
-                        //loading = true;
+                    //loading = true;
 
 
                   ),
@@ -268,59 +273,59 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
-  Future signIn() async {
-    UserModel? user = _currentUser;
-
-    final LoginResult result = await FacebookAuth.instance.login(
-        permissions: ['email']);
-    final OAuthCredential facebookAuthCredential = FacebookAuthProvider
-        .credential(result.accessToken!.token);
-    if (result.status == LoginStatus.success) {
-      _accessToken = result.accessToken;
-
-      final data = await FacebookAuth.instance.getUserData();
-      UserModel model = UserModel.fromJson(data);
-
-      _currentUser = model;
-      setState(() {
-        loading = true;
-        // print("Profile name : ${user!.name}");
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => NavigationContainer()));
-      });
-    }
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  }
-
-}
-class UserModel {
-  final String? email;
-  final String? id;
-  final String? name;
-  final PictureModel? pictureModel;
-
-  const UserModel({this.name, this.pictureModel, this.email, this.id});
-
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      UserModel(
-        email: json['email'],
-        id: json['id'] as String?,
-        name: json['name'],
-        pictureModel: PictureModel.fromJson(json['picture']['data'])
-      );
-}
-
-class PictureModel{
-  final String? url;
-  final int? width;
-  final int? height;
-
-  const PictureModel({this.width, this.height, this.url});
-
-  factory PictureModel.fromJson(Map<String, dynamic> json) =>
-      PictureModel(
-        url: json['url'],
-        width: json['width'],
-        height: json['height']
-      );
+//   Future signIn() async {
+//     UserModel? user = _currentUser;
+//
+//     final LoginResult result = await FacebookAuth.instance.login(
+//         permissions: ['email']);
+//     final OAuthCredential facebookAuthCredential = FacebookAuthProvider
+//         .credential(result.accessToken!.token);
+//     if (result.status == LoginStatus.success) {
+//       _accessToken = result.accessToken;
+//
+//       final data = await FacebookAuth.instance.getUserData();
+//       UserModel model = UserModel.fromJson(data);
+//
+//       _currentUser = model;
+//       setState(() {
+//         loading = true;
+//         // print("Profile name : ${user!.name}");
+//         Navigator.push(context, MaterialPageRoute(
+//             builder: (context) => NavigationContainer()));
+//       });
+//     }
+//     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+//   }
+//
+// }
+// class UserModel {
+//   final String? email;
+//   final String? id;
+//   final String? name;
+//   final PictureModel? pictureModel;
+//
+//   const UserModel({this.name, this.pictureModel, this.email, this.id});
+//
+//   factory UserModel.fromJson(Map<String, dynamic> json) =>
+//       UserModel(
+//         email: json['email'],
+//         id: json['id'] as String?,
+//         name: json['name'],
+//         pictureModel: PictureModel.fromJson(json['picture']['data'])
+//       );
+// }
+//
+// class PictureModel{
+//   final String? url;
+//   final int? width;
+//   final int? height;
+//
+//   const PictureModel({this.width, this.height, this.url});
+//
+//   factory PictureModel.fromJson(Map<String, dynamic> json) =>
+//       PictureModel(
+//         url: json['url'],
+//         width: json['width'],
+//         height: json['height']
+//       );
 }

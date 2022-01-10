@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/_mock_data/mock.dart';
@@ -15,6 +16,7 @@ import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/pages/loginMain.dart';
 import 'package:social_media_app/pages/signin.dart';
 import 'package:social_media_app/services/auth.dart';
+import 'package:social_media_app/services/fbsignin.dart';
 import 'package:social_media_app/services/firebase_api.dart';
 
 
@@ -30,14 +32,27 @@ class _ProfilePageState extends State<ProfilePage> {
 
   UploadTask? task;
   late String urlDownload = '';
-
+  late String _fbName = "User";
+  late String _fbEmail = "User@gmail.com";
   AccessToken? _accessToken;
-  UserModel? _currentUser;
+  //UserModel? _currentUser;
+
+  final FB fb = FB();
+
 
   File? file;
 
+  void initState(){
+    super.initState();
+    getFBName();
+    getFBEmail();
+    _fbName = _fbName;
+    _fbEmail = _fbEmail;
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+
 
 
     final fileName = file != null ? basename(file!.path) : "No File Selected";
@@ -54,8 +69,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget appBar()  {
-    UserModel? user = _currentUser;
+  Widget appBar() {
+
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -67,38 +82,35 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 75,
               height: 75,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: BorderRadius.circular(40),
                   border: Border.all(color: Colors.black)
               ),
               child: Center(
-                child: GestureDetector(
+                child: GestureDetector (
                   onTap: selectFile,
-                  child: Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(37),
-                        image: const DecorationImage(
-                            image: AssetImage("assets/user.jpg"),
-                            fit: BoxFit.cover)
-                    ),
+                  child: const CircleAvatar (
+                    backgroundImage: AssetImage("assets/user.jpg"),
+                    backgroundColor: Colors.transparent,
+                    radius: 40.0,
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 10,),
-            const Text("User",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),),
+            Text(_fbName,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),),
             const SizedBox(height: 10,),
-            const Text("@user431", style: TextStyle(fontSize: 16,color: Colors.black,),),
+            Text(_fbEmail, style: const TextStyle(fontSize: 16,color: Colors.black,),),
           ],
         ),
       ),
       actions: <Widget>[
         FlatButton.icon(
             onPressed: ()async{
-              await _auth.signOut();
               await _auth.logOut();
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>loginMain()));
+              await _auth.signOut();
+
             //  Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
               Fluttertoast.showToast(
                 msg: "Logout Successfully",
@@ -220,5 +232,33 @@ class _ProfilePageState extends State<ProfilePage> {
     return path;
   }
 
+  Future<String>getFBImageUrl() async{
+    final imageurl = await fb.fbProfileImage();
+
+    print(imageurl);
+    return imageurl.toString();
+  }
+   void getFBName() async{
+    final name = await fb.fbProfileName();
+
+
+      if(await name ==  null){
+        _fbName =  "User";
+      }else {
+        _fbName = name;
+      }
+    print("Your name: $_fbName");
+  }
+
+  void getFBEmail() async{
+    final email = await fb.fbProfileEmail();
+
+    if(await email == null){
+      _fbEmail = "User@gmail.com";
+    }else {
+      _fbEmail = email;
+    }
+    print("your email : $_fbEmail");
+  }
 }
 

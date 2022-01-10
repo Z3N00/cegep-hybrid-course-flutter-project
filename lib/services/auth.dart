@@ -105,7 +105,7 @@ class AuthService {
 
 
 
-  // sign out
+  // // sign out
   Future signOut() async {
     try{
 
@@ -119,12 +119,7 @@ class AuthService {
 
   Future<void> logOut() async {
     await FacebookAuth.i.logOut();
-   // user = null;
-   // _accessToken = null;
-   //  setState(() {
-   //    Navigator.push(context, MaterialPageRoute(
-   //        builder: (context) => loginMain()));
-   //  });
+    await _auth.signOut();
   }
 
 }
