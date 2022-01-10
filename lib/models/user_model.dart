@@ -39,9 +39,9 @@ final User Aayush = User(
   imageUrl: 'assets/user.jpg',
   isOnline: false,
 );
-final User Anmol = User(
+final User Jaswanth = User(
   id: 4,
-  name: 'Anmol Multani',
+  name: 'Jaswanth veerepally',
   imageUrl: 'assets/user.jpg',
   isOnline: false,
 );

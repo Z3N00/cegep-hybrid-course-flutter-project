@@ -19,7 +19,7 @@ class Message {
 
 List<Message> chats = [
   Message(
-    sender: tejveer,
+    sender: Kartik,
     time: '5:30 PM',
     text: 'Please follow me ..!💜️',
     unread: false,
@@ -37,7 +37,7 @@ List<Message> chats = [
     unread: false,
   ),
   Message(
-    sender: Anmol,
+    sender: Jaswanth,
     time: '2:30 PM',
     text: 'Can you please give me a ride for tomorrow!',
     unread: true,
